@@ -31,9 +31,13 @@ function Ingredients() {
   };
 
   const removeIngredientHandler = ingredientId => {
-    setUserIngredients(prevIngredients =>
-      prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
-    );
+    fetch(`${firebase}/ingredients/${ingredientId}.json`, {
+      method: 'DELETE',
+    }).then(_response => {
+      setUserIngredients(prevIngredients =>
+        prevIngredients.filter(ingredient => ingredient.id !== ingredientId)
+      );
+    });
   };
 
   return (
